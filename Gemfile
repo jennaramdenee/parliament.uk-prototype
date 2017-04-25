@@ -10,7 +10,7 @@ gem 'json-ld', '2.1.2'
 gem 'vcard', '0.2.15'
 
 # Parliament Ruby is a wrapper for the internal Parliament data API
-gem 'parliament-ruby', '0.6.3'
+gem 'parliament-ruby', '0.6.3', git: 'https://github.com/ukparliament/parliament-ruby', branch: 'aebirim/website-981_constituency_decorators', ref: '226a22b'
 
 # Pugin is the front-end component library used by Parliament
 gem 'pugin', git: 'https://github.com/ukparliament/parliament.uk-pugin-components-rails', :tag => '0.5.5'
