@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   end
 
   def get_data_url
-    raise StandardError('Must provide valid data')
+    raise StandardError, 'Must provide valid data'
   end
 
   def data_check
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
       response.headers['Accept'] = request.formats.first
       redirect_to(@data_url.call(params).query_url) && return
     else
-      raise StandardError('Data URL does not exist')
+      raise StandardError, 'Data URL does not exist'
     end
   end
 end
