@@ -49,8 +49,14 @@ class PostcodesController < ApplicationController
     show: proc { |params| ParliamentHelper.parliament_request.constituencies.postcode_lookup(params[:postcode]) }
   }.freeze
 
+<<<<<<< HEAD
   def get_data_url
     ROUTE_MAP[params[:action].to_sym]
   end
 
+=======
+  def data_url
+    ROUTE_MAP[params[:action].to_sym]
+  end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
 end

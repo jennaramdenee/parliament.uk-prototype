@@ -38,7 +38,11 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, error.message
   end
 
+<<<<<<< HEAD
   def get_data_url
+=======
+  def data_url
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
     raise StandardError, 'Must provide valid data'
   end
 
@@ -47,7 +51,7 @@ class ApplicationController < ActionController::Base
     return unless DATA_FORMATS.include?(request.formats.first)
 
     # find corresponding data url
-    @data_url = get_data_url
+    @data_url = data_url
     # redirect
     if @data_url != nil
       # if so, set headers

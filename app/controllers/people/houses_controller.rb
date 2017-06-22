@@ -31,6 +31,7 @@ module People
     private
 
     ROUTE_MAP = {
+<<<<<<< HEAD
       index:    proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).houses },
       current:  proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).houses.current }
     }.freeze
@@ -39,5 +40,14 @@ module People
       ROUTE_MAP[params[:action].to_sym]
     end
 
+=======
+      index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).houses },
+      current: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).houses.current }
+    }.freeze
+
+    def data_url
+      ROUTE_MAP[params[:action].to_sym]
+    end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
   end
 end

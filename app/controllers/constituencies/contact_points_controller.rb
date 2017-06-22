@@ -21,7 +21,11 @@ module Constituencies
       index: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]).contact_point }
       }.freeze
 
+<<<<<<< HEAD
     def get_data_url
+=======
+    def data_url
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
       ROUTE_MAP[params[:action].to_sym]
     end
   end

@@ -72,6 +72,7 @@ class PartiesController < ApplicationController
   private
 
   ROUTE_MAP = {
+<<<<<<< HEAD
     index:              proc { ParliamentHelper.parliament_request.parties },
     show:               proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]) },
     lookup:             proc { |params| ParliamentHelper.parliament_request.parties.lookup(params[:source], params[:id]) },
@@ -85,4 +86,18 @@ class PartiesController < ApplicationController
     ROUTE_MAP[params[:action].to_sym]
   end
 
+=======
+    index: proc { ParliamentHelper.parliament_request.parties },
+    show: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]) },
+    lookup: proc { |params| ParliamentHelper.parliament_request.parties.lookup(params[:source], params[:id]) },
+    current: proc { ParliamentHelper.parliament_request.parties.current },
+    letters: proc { |params| ParliamentHelper.parliament_request.parties(params[:letter]) },
+    a_to_z: proc { ParliamentHelper.parliament_request.parties.a_z_letters },
+    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.parties.partial(params[:letters]) }
+  }.freeze
+
+  def data_url
+    ROUTE_MAP[params[:action].to_sym]
+  end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
 end

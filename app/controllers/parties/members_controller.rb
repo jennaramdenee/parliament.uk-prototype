@@ -79,6 +79,7 @@ module Parties
     private
 
     ROUTE_MAP = {
+<<<<<<< HEAD
       index:            proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members },
       current:          proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current },
       letters:          proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members(params[:letter]) },
@@ -91,5 +92,18 @@ module Parties
       ROUTE_MAP[params[:action].to_sym]
     end
 
+=======
+      index: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members },
+      current: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current },
+      letters: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members(params[:letter]) },
+      current_letters: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current(params[:letter]) },
+      a_to_z: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.a_z_letters },
+      a_to_z_current: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current.a_z_letters }
+    }.freeze
+
+    def data_url
+      ROUTE_MAP[params[:action].to_sym]
+    end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
   end
 end

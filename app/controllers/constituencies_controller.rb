@@ -177,6 +177,7 @@ class ConstituenciesController < ApplicationController
   private
 
   ROUTE_MAP = {
+<<<<<<< HEAD
     index:              proc { ParliamentHelper.parliament_request.constituencies },
     show:               proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
     lookup:             proc { |params| ParliamentHelper.parliament_request.constituencies.lookup(params[:source], params[:id]) },
@@ -187,9 +188,21 @@ class ConstituenciesController < ApplicationController
     letters:            proc { |params| ParliamentHelper.parliament_request.constituencies(params[:letter]) },
     current_letters:    proc { |params| ParliamentHelper.parliament_request.constituencies.current(params[:letter]) },
     a_to_z:             proc { ParliamentHelper.parliament_request.constituencies.a_z_letters }
+=======
+    index: proc { ParliamentHelper.parliament_request.constituencies },
+    show: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
+    lookup: proc { |params| ParliamentHelper.parliament_request.constituencies.lookup(params[:source], params[:id]) },
+    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.constituencies.partial(params[:letters]) },
+    a_to_z_current: proc { ParliamentHelper.parliament_request.constituencies.current.a_z_letters },
+    current: proc { ParliamentHelper.parliament_request.constituencies.current },
+    map: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
+    letters: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:letter]) },
+    current_letters: proc { |params| ParliamentHelper.parliament_request.constituencies.current(params[:letter]) },
+    a_to_z: proc { ParliamentHelper.parliament_request.constituencies.a_z_letters }
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
   }.freeze
 
-  def get_data_url
+  def data_url
     ROUTE_MAP[params[:action].to_sym]
   end
 end

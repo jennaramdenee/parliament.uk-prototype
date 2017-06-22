@@ -35,10 +35,17 @@ module Parliaments
 
     ROUTE_MAP = {
       index: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses },
+<<<<<<< HEAD
       show: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]) },
     }.freeze
 
     def get_data_url
+=======
+      show: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]) }
+    }.freeze
+
+    def data_url
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
       ROUTE_MAP[params[:action].to_sym]
     end
   end

@@ -20,9 +20,15 @@ module People
       index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).contact_points }
     }.freeze
 
+<<<<<<< HEAD
     def get_data_url
       ROUTE_MAP[params[:action].to_sym]
     end
 
+=======
+    def data_url
+      ROUTE_MAP[params[:action].to_sym]
+    end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
   end
 end

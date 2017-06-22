@@ -61,6 +61,7 @@ module People
     private
 
     ROUTE_MAP = {
+<<<<<<< HEAD
       index:            proc { ParliamentHelper.parliament_request.people.members },
       current:          proc { ParliamentHelper.parliament_request.people.members.current },
       letters:          proc { |params| ParliamentHelper.parliament_request.people.members(params[:letter]) },
@@ -73,5 +74,18 @@ module People
       ROUTE_MAP[params[:action].to_sym]
     end
 
+=======
+      index: proc { ParliamentHelper.parliament_request.people.members },
+      current: proc { ParliamentHelper.parliament_request.people.members.current },
+      letters: proc { |params| ParliamentHelper.parliament_request.people.members(params[:letter]) },
+      current_letters: proc { |params| ParliamentHelper.parliament_request.people.members.current(params[:letter]) },
+      a_to_z: proc { ParliamentHelper.parliament_request.people.members.a_z_letters },
+      a_to_z_current: proc { ParliamentHelper.parliament_request.people.members.current.a_z_letters }
+    }.freeze
+
+    def data_url
+      ROUTE_MAP[params[:action].to_sym]
+    end
+>>>>>>> b270c6c7c67c89b2600e383e8c15e36c32256962
   end
 end
