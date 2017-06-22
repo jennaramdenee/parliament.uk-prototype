@@ -6,7 +6,7 @@ class ConstituenciesController < ApplicationController
 
   def index
     @constituencies, @letters = RequestHelper.filter_response_data(
-      parliament_request.constituencies,
+      ROUTE_MAP[:index].call,
       'http://id.ukpds.org/schema/ConstituencyGroup',
       ::Grom::Node::BLANK
     )
@@ -20,11 +20,10 @@ class ConstituenciesController < ApplicationController
   # @return [Grom::Node] object with type 'http://id.ukpds.org/schema/ConstituencyGroup'.
 
   def show
-    constituency_id = params[:constituency_id]
     @postcode = flash[:postcode]
 
     @constituency, @seat_incumbencies = RequestHelper.filter_response_data(
-    parliament_request.constituencies(constituency_id),
+    ROUTE_MAP[:show].call(params),
     'http://id.ukpds.org/schema/ConstituencyGroup',
     'http://id.ukpds.org/schema/SeatIncumbency'
     )
@@ -53,10 +52,7 @@ class ConstituenciesController < ApplicationController
   # @controller_action_param :id [String] external id which identifies a constituency.
 
   def lookup
-    source = params[:source]
-    id = params[:id]
-
-    @constituency = parliament_request.constituencies.lookup(source, id).get.first
+    @constituency = ROUTE_MAP[:lookup].call(params).get.first
 
     redirect_to constituency_path(@constituency.graph_id)
   end
@@ -78,7 +74,7 @@ class ConstituenciesController < ApplicationController
 
   def current
     @constituencies, @letters = RequestHelper.filter_response_data(
-      parliament_request.constituencies.current,
+      ROUTE_MAP[:current].call,
       'http://id.ukpds.org/schema/ConstituencyGroup',
       ::Grom::Node::BLANK
     )
@@ -92,10 +88,8 @@ class ConstituenciesController < ApplicationController
   # @return [Grom::Node] object with type 'http://id.ukpds.org/schema/ConstituencyGroup' which holds a geo polygon.
 
   def map
-    constituency_id = params[:constituency_id]
-
     @constituency = RequestHelper.filter_response_data(
-      parliament_request.constituencies(constituency_id),
+      ROUTE_MAP[:map].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup'
     ).first
   end
@@ -110,10 +104,8 @@ class ConstituenciesController < ApplicationController
   # @return [Array] Grom::Nodes of type 'http://id.ukpds.org/schema/ConstituencyGroup'.
 
   def letters
-    letter = params[:letter]
-
     @constituencies, @letters = RequestHelper.filter_response_data(
-      parliament_request.constituencies(letter),
+      ROUTE_MAP[:letters].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup',
       ::Grom::Node::BLANK
     )
@@ -127,10 +119,8 @@ class ConstituenciesController < ApplicationController
   # @return [Array] Grom::Nodes of type 'http://id.ukpds.org/schema/ConstituencyGroup'.
 
   def current_letters
-    letter = params[:letter]
-
     @constituencies, @letters = RequestHelper.filter_response_data(
-      parliament_request.constituencies.current(letter),
+      ROUTE_MAP[:current_letters].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup',
       ::Grom::Node::BLANK
     )
@@ -143,24 +133,22 @@ class ConstituenciesController < ApplicationController
   # @return [Array] letters representing all constituencies.
 
   def a_to_z
-    @letters = RequestHelper.process_available_letters(parliament_request.constituencies.a_z_letters)
+    @letters = RequestHelper.process_available_letters(ROUTE_MAP[:a_to_z].call)
   end
 
   # Renders a list of letters taken from first letter of all current constituencies. Shown with an a - z partial view.
   # @return [Array] letters representing all current constituencies.
 
   def a_to_z_current
-    @letters = RequestHelper.process_available_letters(parliament_request.constituencies.current.a_z_letters)
+    @letters = RequestHelper.process_available_letters(ROUTE_MAP[:a_to_z_current].call)
   end
 
   # Look up to find a constituency given a string.  Redirects to either a single constituency or list of constituencies.
   # @controller_action_param :letters [String] case insensitive string to lookup.
 
   def lookup_by_letters
-    letters = params[:letters]
-
     @constituencies, @letters = RequestHelper.filter_response_data(
-      parliament_request.constituencies.partial(letters),
+      ROUTE_MAP[:lookup_by_letters].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup',
       ::Grom::Node::BLANK
     )
