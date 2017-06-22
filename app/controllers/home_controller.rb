@@ -3,11 +3,9 @@ class HomeController < ApplicationController
 
   def index; end
 
-  def mps;
-    enable_top_navigation; enable_status_banner
-
+  def mps
     @parliaments, @parties, @speaker = RequestHelper.filter_response_data(
-      parliament_request.people.mps,
+      ROUTE_MAP[:mps].call,
       'http://id.ukpds.org/schema/ParliamentPeriod',
       'http://id.ukpds.org/schema/Party',
       'http://id.ukpds.org/schema/Person'
