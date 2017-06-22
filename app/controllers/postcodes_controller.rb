@@ -46,9 +46,7 @@ class PostcodesController < ApplicationController
   private
 
   ROUTE_MAP = {
-    index: nil,
     show: proc { |params| ParliamentHelper.parliament_request.constituencies.postcode_lookup(params[:postcode]) },
-    lookup: nil,
   }
 
   def get_data_url

@@ -143,13 +143,11 @@ RSpec.describe PostcodesController, vcr: true do
 
       it 'GET index should raise an error' do
         expect{get :index}.to raise_error(StandardError, 'Data URL does not exist')
+        expect(response).not_to have_http_status(302)
       end
 
       it 'GET lookup should raise an error' do
         expect{get :lookup, params: { postcode: 'SW1A 2AA', previous_controller: 'postcodes', previous_action: 'index' }}.to raise_error(StandardError, 'Data URL does not exist')
-      end
-
-      it 'should not redirect to the data service' do
         expect(response).not_to have_http_status(302)
       end
     end
