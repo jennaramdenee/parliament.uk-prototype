@@ -3,16 +3,14 @@ class ContactPointsController < ApplicationController
 
   def index
     @contact_points = RequestHelper.filter_response_data(
-      parliament_request.contact_points,
+      ROUTE_MAP[:index].call,
       'http://id.ukpds.org/schema/ContactPoint'
     )
   end
 
   def show
-    contact_point_id = params[:contact_point_id]
-
     @contact_point = RequestHelper.filter_response_data(
-      parliament_request.contact_points(contact_point_id),
+      ROUTE_MAP[:show].call(params),
       'http://id.ukpds.org/schema/ContactPoint'
     ).first
 
