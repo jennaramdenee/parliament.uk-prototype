@@ -50,7 +50,7 @@ module Houses
           index: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties },
           current: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties.current },
           show: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties(params[:party_id]) },
-        }
+        }.freeze
 
         def get_data_url
           ROUTE_MAP[params[:action].to_sym]

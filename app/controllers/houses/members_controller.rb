@@ -95,7 +95,7 @@ module Houses
       letters: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).members(params[:letter]) },
       current_letters: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).members.current(params[:letter]) },
       a_to_z: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).members.a_z_letters }
-    }
+    }.freeze
 
     def get_data_url
       ROUTE_MAP[params[:action].to_sym]

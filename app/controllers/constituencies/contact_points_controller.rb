@@ -19,7 +19,7 @@ module Constituencies
 
     ROUTE_MAP = {
       index: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]).contact_point }
-      }
+      }.freeze
 
     def get_data_url
       ROUTE_MAP[params[:action].to_sym]
