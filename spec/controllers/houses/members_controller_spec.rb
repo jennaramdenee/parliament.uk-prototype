@@ -191,14 +191,12 @@ RSpec.describe Houses::MembersController, vcr: true do
           },
           {
             route: 'letters',
-            parameters: { letter: 'p' },
-            parameters: { house_id: 'cqIATgUK' },
+            parameters: { house_id: 'cqIATgUK', letter: 'p' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/houses/cqIATgUK/members/p"
           },
           {
             route: 'current_letters',
-            parameters: { letter: 'p' },
-            parameters: { house_id: 'cqIATgUK' },
+            parameters: { house_id: 'cqIATgUK', letter: 'p' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/houses/cqIATgUK/members/current/p"
           },
           {
