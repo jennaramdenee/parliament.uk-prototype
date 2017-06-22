@@ -58,11 +58,22 @@ RSpec.describe HomeController, vcr: true do
       it 'GET index should raise an error' do
         expect{get :index}.to raise_error(StandardError, 'Data URL does not exist')
       end
+    end
 
-      it 'GET mps should raise an error' do
-        expect{get :mps}.to raise_error(StandardError, 'Data URL does not exist')
+    context 'data available' do
+      before(:each) do
+        headers = { 'Accept' => 'application/rdf+xml' }
+        request.headers.merge(headers)
+        get :mps
       end
 
+      it 'GET mps should have a response with http status redirect (302)' do
+        expect(response).to redirect_to("#{ENV['PARLIAMENT_BASE_URL']}/people/mps")
+      end
+
+      it 'GET mps redirects to the data service' do
+        expect(response).to have_http_status(302)
+      end
     end
   end
 end
