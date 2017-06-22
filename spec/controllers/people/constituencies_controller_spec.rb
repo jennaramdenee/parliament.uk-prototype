@@ -63,7 +63,7 @@ RSpec.describe People::ConstituenciesController, vcr: true do
             route: 'current',
             parameters: { person_id: '7TX8ySd4' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/people/7TX8ySd4/constituencies/current"
-          },
+          }
         ]
 
       before(:each) do

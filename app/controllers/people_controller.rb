@@ -108,8 +108,8 @@ class PeopleController < ApplicationController
     lookup: proc { |params| ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
     letters: proc { |params| ParliamentHelper.parliament_request.people(params[:letter]) },
     a_to_z: proc { ParliamentHelper.parliament_request.people.a_z_letters },
-    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) },
-  }
+    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) }
+  }.freeze
 
   def get_data_url
     ROUTE_MAP[params[:action].to_sym]

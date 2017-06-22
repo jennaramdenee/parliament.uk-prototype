@@ -197,7 +197,7 @@ RSpec.describe Parties::MembersController, vcr: true do
             route: 'a_to_z_current',
             parameters: { party_id: 'jF43Jxoc' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parties/jF43Jxoc/members/current/a_z_letters"
-          },
+          }
         ]
 
       before(:each) do

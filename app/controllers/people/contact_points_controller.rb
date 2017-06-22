@@ -17,8 +17,8 @@ module People
     private
 
     ROUTE_MAP = {
-      index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).contact_points },
-    }
+      index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).contact_points }
+    }.freeze
 
     def get_data_url
       ROUTE_MAP[params[:action].to_sym]

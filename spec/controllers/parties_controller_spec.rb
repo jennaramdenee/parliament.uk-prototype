@@ -233,7 +233,7 @@ RSpec.describe PartiesController, vcr: true do
             route: 'lookup_by_letters',
             parameters: { letters: 'labour' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parties/partial/labour"
-          },
+          }
         ]
 
       before(:each) do

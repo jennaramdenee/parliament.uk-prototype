@@ -210,7 +210,7 @@ RSpec.describe People::MembersController, vcr: true do
           {
             route: 'a_to_z_current',
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/people/members/current/a_z_letters"
-          },
+          }
         ]
 
       before(:each) do

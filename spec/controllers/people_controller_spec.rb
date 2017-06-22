@@ -256,7 +256,7 @@ RSpec.describe PeopleController, vcr: true do
             route: 'lookup_by_letters',
             parameters: { letters: 'creasy' },
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/people/partial/creasy"
-          },
+          }
         ]
 
       before(:each) do

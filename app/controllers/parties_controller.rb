@@ -78,8 +78,8 @@ class PartiesController < ApplicationController
     current: proc { ParliamentHelper.parliament_request.parties.current },
     letters: proc { |params| ParliamentHelper.parliament_request.parties(params[:letter]) },
     a_to_z: proc { ParliamentHelper.parliament_request.parties.a_z_letters },
-    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.parties.partial(params[:letters]) },
-  }
+    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.parties.partial(params[:letters]) }
+  }.freeze
 
   def get_data_url
     ROUTE_MAP[params[:action].to_sym]

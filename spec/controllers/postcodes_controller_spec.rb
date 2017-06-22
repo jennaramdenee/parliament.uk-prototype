@@ -123,7 +123,7 @@ RSpec.describe PostcodesController, vcr: true do
       before(:each) do
         headers = { 'Accept' => 'application/rdf+xml' }
         request.headers.merge(headers)
-        get :show, params: { postcode: 'SW1A 2AA' }
+        get :show, params: { postcode: 'SW1A2AA' }
       end
 
       it 'should have a response with http status redirect (302)' do
@@ -131,7 +131,7 @@ RSpec.describe PostcodesController, vcr: true do
       end
 
       it 'redirects to the data service' do
-        expect(response).to redirect_to("#{ENV['PARLIAMENT_BASE_URL']}/constituencies/postcode_lookup/SW1A 2AA")
+        expect(response).to redirect_to("#{ENV['PARLIAMENT_BASE_URL']}/constituencies/postcode_lookup/SW1A2AA")
       end
     end
 

@@ -23,7 +23,7 @@ class MetaController < ApplicationController
   private
 
   ROUTE_MAP = {
-  }
+  }.freeze
 
   def get_data_url
     ROUTE_MAP[params[:action].to_sym]

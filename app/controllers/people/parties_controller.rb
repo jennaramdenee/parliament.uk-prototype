@@ -32,8 +32,8 @@ module People
 
     ROUTE_MAP = {
       index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).parties },
-      current: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).parties.current },
-    }
+      current: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).parties.current }
+    }.freeze
 
     def get_data_url
       ROUTE_MAP[params[:action].to_sym]

@@ -59,7 +59,7 @@ RSpec.describe ContactPointsController, vcr: true do
               route: 'show',
               parameters: { contact_point_id: 'fFm9NQmr' },
               data_url: "#{ENV['PARLIAMENT_BASE_URL']}/contact_points/fFm9NQmr"
-            },
+            }
           ]
 
         before(:each) do
