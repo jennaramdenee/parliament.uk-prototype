@@ -31,8 +31,8 @@ module People
     private
 
     ROUTE_MAP = {
-      index: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies },
-      current: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies.current }
+      index:    proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies },
+      current:  proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies.current }
     }.freeze
 
     def get_data_url

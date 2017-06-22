@@ -23,8 +23,8 @@ class ContactPointsController < ApplicationController
   private
 
   ROUTE_MAP = {
-    index: proc { ParliamentHelper.parliament_request.contact_points },
-    show: proc { |params| ParliamentHelper.parliament_request.contact_points(params[:contact_point_id]) }
+    index:  proc { ParliamentHelper.parliament_request.contact_points },
+    show:   proc { |params| ParliamentHelper.parliament_request.contact_points(params[:contact_point_id]) }
   }.freeze
 
   def get_data_url

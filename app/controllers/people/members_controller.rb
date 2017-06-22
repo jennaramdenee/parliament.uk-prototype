@@ -61,12 +61,12 @@ module People
     private
 
     ROUTE_MAP = {
-      index: proc { ParliamentHelper.parliament_request.people.members },
-      current: proc { ParliamentHelper.parliament_request.people.members.current },
-      letters: proc { |params| ParliamentHelper.parliament_request.people.members(params[:letter]) },
-      current_letters: proc { |params| ParliamentHelper.parliament_request.people.members.current(params[:letter]) },
-      a_to_z: proc { ParliamentHelper.parliament_request.people.members.a_z_letters },
-      a_to_z_current: proc { ParliamentHelper.parliament_request.people.members.current.a_z_letters }
+      index:            proc { ParliamentHelper.parliament_request.people.members },
+      current:          proc { ParliamentHelper.parliament_request.people.members.current },
+      letters:          proc { |params| ParliamentHelper.parliament_request.people.members(params[:letter]) },
+      current_letters:  proc { |params| ParliamentHelper.parliament_request.people.members.current(params[:letter]) },
+      a_to_z:           proc { ParliamentHelper.parliament_request.people.members.a_z_letters },
+      a_to_z_current:   proc { ParliamentHelper.parliament_request.people.members.current.a_z_letters }
     }.freeze
 
     def get_data_url

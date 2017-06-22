@@ -103,12 +103,12 @@ class PeopleController < ApplicationController
 
   # What to do about postcode_lookup?
   ROUTE_MAP = {
-    index: proc { ParliamentHelper.parliament_request.people },
-    show: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]) },
-    lookup: proc { |params| ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
-    letters: proc { |params| ParliamentHelper.parliament_request.people(params[:letter]) },
-    a_to_z: proc { ParliamentHelper.parliament_request.people.a_z_letters },
-    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) }
+    index:              proc { ParliamentHelper.parliament_request.people },
+    show:               proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]) },
+    lookup:             proc { |params| ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
+    letters:            proc { |params| ParliamentHelper.parliament_request.people(params[:letter]) },
+    a_to_z:             proc { ParliamentHelper.parliament_request.people.a_z_letters },
+    lookup_by_letters:  proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) }
   }.freeze
 
   def get_data_url

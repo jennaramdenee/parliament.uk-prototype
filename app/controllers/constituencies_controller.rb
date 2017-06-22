@@ -177,16 +177,16 @@ class ConstituenciesController < ApplicationController
   private
 
   ROUTE_MAP = {
-    index: proc { ParliamentHelper.parliament_request.constituencies },
-    show: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
-    lookup: proc { |params| ParliamentHelper.parliament_request.constituencies.lookup(params[:source], params[:id]) },
-    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.constituencies.partial(params[:letters]) },
-    a_to_z_current: proc { ParliamentHelper.parliament_request.constituencies.current.a_z_letters },
-    current: proc { ParliamentHelper.parliament_request.constituencies.current },
-    map: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
-    letters: proc { |params| ParliamentHelper.parliament_request.constituencies(params[:letter]) },
-    current_letters: proc { |params| ParliamentHelper.parliament_request.constituencies.current(params[:letter]) },
-    a_to_z: proc { ParliamentHelper.parliament_request.constituencies.a_z_letters }
+    index:              proc { ParliamentHelper.parliament_request.constituencies },
+    show:               proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
+    lookup:             proc { |params| ParliamentHelper.parliament_request.constituencies.lookup(params[:source], params[:id]) },
+    lookup_by_letters:  proc { |params| ParliamentHelper.parliament_request.constituencies.partial(params[:letters]) },
+    a_to_z_current:     proc { ParliamentHelper.parliament_request.constituencies.current.a_z_letters },
+    current:            proc { ParliamentHelper.parliament_request.constituencies.current },
+    map:                proc { |params| ParliamentHelper.parliament_request.constituencies(params[:constituency_id]) },
+    letters:            proc { |params| ParliamentHelper.parliament_request.constituencies(params[:letter]) },
+    current_letters:    proc { |params| ParliamentHelper.parliament_request.constituencies.current(params[:letter]) },
+    a_to_z:             proc { ParliamentHelper.parliament_request.constituencies.a_z_letters }
   }.freeze
 
   def get_data_url
