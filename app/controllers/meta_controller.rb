@@ -1,6 +1,5 @@
 class MetaController < ApplicationController
-  before_action :disable_top_navigation
-  before_action :data_check
+  before_action :disable_top_navigation, :data_check
 
   def index
     @meta_routes = []
@@ -20,4 +19,14 @@ class MetaController < ApplicationController
   def cookie_policy
     render 'cookie_policy'
   end
+
+  private
+
+  ROUTE_MAP = {
+  }
+
+  def get_data_url
+    ROUTE_MAP[params[:action].to_sym]
+  end
+
 end

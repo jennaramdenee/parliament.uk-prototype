@@ -20,7 +20,7 @@ class HomeController < ApplicationController
 
   ROUTE_MAP = {
     mps: proc { ParliamentHelper.parliament_request.people.mps }
-  }
+  }.freeze
 
   def get_data_url
     ROUTE_MAP[params[:action].to_sym]
