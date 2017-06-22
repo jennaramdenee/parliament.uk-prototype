@@ -3,10 +3,8 @@ module People
     before_action :data_check
 
     def index
-      person_id = params[:person_id]
-
       @person, @seat_incumbencies = RequestHelper.filter_response_data(
-      parliament_request.people(person_id).constituencies,
+      ROUTE_MAP[:index].call(params),
       'http://id.ukpds.org/schema/Person',
       'http://id.ukpds.org/schema/SeatIncumbency'
       )
@@ -16,10 +14,8 @@ module People
     end
 
     def current
-      person_id = params[:person_id]
-
       @person, @constituency = RequestHelper.filter_response_data(
-      parliament_request.people(person_id).constituencies.current,
+      ROUTE_MAP[:current].call(params),
       'http://id.ukpds.org/schema/Person',
       'http://id.ukpds.org/schema/ConstituencyGroup'
       )
