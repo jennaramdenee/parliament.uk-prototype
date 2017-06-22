@@ -2,31 +2,24 @@ class HousesController < ApplicationController
   before_action :data_check
 
   def index
-    @houses = parliament_request.houses.get.sort_by(:name)
+    @houses = ROUTE_MAP[:index].call.get.sort_by(:name)
   end
 
   def show
-    house_id = params[:house_id]
-
     @house = RequestHelper.filter_response_data(
-      parliament_request.houses(house_id),
+      ROUTE_MAP[:show].call(params),
       'http://id.ukpds.org/schema/House'
     ).first
   end
 
   def lookup
-    source = params[:source]
-    id = params[:id]
-
-    @house = parliament_request.houses.lookup(source, id).get.first
+    @house = ROUTE_MAP[:lookup].call(params).get.first
 
     redirect_to house_path(@house.graph_id)
   end
 
   def lookup_by_letters
-    letters = params[:letters]
-
-    data = parliament_request.houses.partial(letters).get
+    data = ROUTE_MAP[:lookup_by_letters].call(params).get
 
     if data.size == 1
       redirect_to house_path(data.first.graph_id)

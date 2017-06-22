@@ -7,10 +7,8 @@ module Constituencies
     # @return [Grom::Node] object with type 'http://id.ukpds.org/schema/ConstituencyGroup' which has a contact point.
 
     def index
-      constituency_id = params[:constituency_id]
-
       @constituency = RequestHelper.filter_response_data(
-      parliament_request.constituencies(constituency_id).contact_point,
+      ROUTE_MAP[:index].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup'
       ).first
     end

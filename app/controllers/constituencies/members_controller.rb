@@ -3,10 +3,8 @@ module Constituencies
     before_action :data_check
 
     def index
-      constituency_id = params[:constituency_id]
-
       @constituency, @seat_incumbencies = RequestHelper.filter_response_data(
-      parliament_request.constituencies(constituency_id).members,
+      ROUTE_MAP[:index].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup',
       'http://id.ukpds.org/schema/SeatIncumbency'
       )
@@ -22,10 +20,8 @@ module Constituencies
     # @return [Grom::Node] object with type 'http://id.ukpds.org/schema/SeatIncumbency'.
 
     def current
-      constituency_id = params[:constituency_id]
-
       @constituency, @seat_incumbency = RequestHelper.filter_response_data(
-      parliament_request.constituencies(constituency_id).members.current,
+      ROUTE_MAP[:current].call(params),
       'http://id.ukpds.org/schema/ConstituencyGroup',
       'http://id.ukpds.org/schema/SeatIncumbency'
       )
