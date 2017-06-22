@@ -3,10 +3,8 @@ module Parties
     before_action :data_check
 
     def index
-      party_id = params[:party_id]
-
       @party, @people, @letters = RequestHelper.filter_response_data(
-      parliament_request.parties(party_id).members,
+      ROUTE_MAP[:index].call(params),
       'http://id.ukpds.org/schema/Party',
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -18,10 +16,8 @@ module Parties
     end
 
     def current
-      party_id = params[:party_id]
-
       @party, @people, @letters = RequestHelper.filter_response_data(
-      parliament_request.parties(party_id).members.current,
+      ROUTE_MAP[:current].call(params),
       'http://id.ukpds.org/schema/Party',
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -33,11 +29,8 @@ module Parties
     end
 
     def letters
-      letter = params[:letter]
-      party_id = params[:party_id]
-
       @party, @people, @letters = RequestHelper.filter_response_data(
-      parliament_request.parties(party_id).members(letter),
+      ROUTE_MAP[:letters].call(params),
       'http://id.ukpds.org/schema/Party',
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -49,11 +42,8 @@ module Parties
     end
 
     def current_letters
-      letter = params[:letter]
-      party_id = params[:party_id]
-
       @party, @people, @letters = RequestHelper.filter_response_data(
-      parliament_request.parties(party_id).members.current(letter),
+      ROUTE_MAP[:current_letters].call(params),
       'http://id.ukpds.org/schema/Party',
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -66,14 +56,12 @@ module Parties
 
     def a_to_z
       @party_id = params[:party_id]
-
-      @letters = RequestHelper.process_available_letters(parliament_request.parties(@party_id).members.a_z_letters)
+      @letters = RequestHelper.process_available_letters(ROUTE_MAP[:a_to_z].call(params))
     end
 
     def a_to_z_current
       @party_id = params[:party_id]
-
-      @letters = RequestHelper.process_available_letters(parliament_request.parties(@party_id).members.current.a_z_letters)
+      @letters = RequestHelper.process_available_letters(ROUTE_MAP[:a_to_z_current].call(params))
     end
 
     private
