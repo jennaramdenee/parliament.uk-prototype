@@ -1,4 +1,6 @@
 class PeopleController < ApplicationController
+  before_action :data_check
+
   def index
     @people, @letters = RequestHelper.filter_response_data(
       parliament_request.people,
@@ -8,15 +10,6 @@ class PeopleController < ApplicationController
 
     @people = @people.sort_by(:sort_name)
     @letters = @letters.map(&:value)
-  end
-
-  def lookup
-    source = params[:source]
-    id = params[:id]
-
-    @person = parliament_request.people.lookup(source, id).get.first
-
-    redirect_to person_path(@person.graph_id)
   end
 
   def show
@@ -38,7 +31,7 @@ class PeopleController < ApplicationController
       list:             @person.incumbencies,
       parameters:       [:end_date],
       prepend_rejected: false
-    })
+      })
 
     @most_recent_incumbency = sorted_incumbencies.last
     @current_incumbency = @most_recent_incumbency && @most_recent_incumbency.current? ? @most_recent_incumbency : nil
@@ -54,6 +47,15 @@ class PeopleController < ApplicationController
       flash[:error] = error.message
       @postcode = nil
     end
+  end
+
+  def lookup
+    source = params[:source]
+    id = params[:id]
+
+    @person = parliament_request.people.lookup(source, id).get.first
+
+    redirect_to person_path(@person.graph_id)
   end
 
   def postcode_lookup
@@ -95,5 +97,21 @@ class PeopleController < ApplicationController
 
     @people = @people.sort_by(:name)
     @letters = @letters.map(&:value)
+  end
+
+  private
+
+  # What to do about postcode_lookup?
+  ROUTE_MAP = {
+    index: proc { ParliamentHelper.parliament_request.people },
+    show: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]) },
+    lookup: proc { |params| ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
+    letters: proc { |params| ParliamentHelper.parliament_request.people(params[:letter]) },
+    a_to_z: proc { ParliamentHelper.parliament_request.people.a_z_letters },
+    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) }
+  }.freeze
+
+  def data_url
+    ROUTE_MAP[params[:action].to_sym]
   end
 end
