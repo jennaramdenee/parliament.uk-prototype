@@ -4,11 +4,8 @@ module Parliaments
       before_action :data_check
 
       def index
-        parliament_id = params[:parliament_id]
-        party_id      = params[:party_id]
-
         @parliament, @party, @people, @letters = RequestHelper.filter_response_data(
-        parliament_request.parliaments(parliament_id).parties(party_id).members,
+        ROUTE_MAP[:index].call(params),
         'http://id.ukpds.org/schema/ParliamentPeriod',
         'http://id.ukpds.org/schema/Party',
         'http://id.ukpds.org/schema/Person',
@@ -22,11 +19,8 @@ module Parliaments
       end
 
       def a_to_z
-        parliament_id = params[:parliament_id]
-        party_id      = params[:party_id]
-
         @parliament, @party, @letters = RequestHelper.filter_response_data(
-        parliament_request.parliaments(parliament_id).parties(party_id).members,
+        ROUTE_MAP[:a_to_z].call(params),
         'http://id.ukpds.org/schema/ParliamentPeriod',
         'http://id.ukpds.org/schema/Party',
         ::Grom::Node::BLANK
@@ -38,12 +32,8 @@ module Parliaments
       end
 
       def letters
-        parliament_id = params[:parliament_id]
-        party_id      = params[:party_id]
-        letter        = params[:letter]
-
         @parliament, @party, @people, @letters = RequestHelper.filter_response_data(
-        parliament_request.parliaments(parliament_id).parties(party_id).members(letter),
+        ROUTE_MAP[:letters].call(params),
         'http://id.ukpds.org/schema/ParliamentPeriod',
         'http://id.ukpds.org/schema/Party',
         'http://id.ukpds.org/schema/Person',
@@ -60,7 +50,7 @@ module Parliaments
 
       ROUTE_MAP = {
         index: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]).members },
-        a_to_z: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]).members.a_z_letters },
+        a_to_z: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]).members },
         letters: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]).members(params[:letter]) }
       }.freeze
 

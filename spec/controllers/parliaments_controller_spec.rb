@@ -199,6 +199,11 @@ RSpec.describe ParliamentsController, vcr: true do
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parliaments"
           },
           {
+            route: 'show',
+            parameters: { parliament_id: '0FxbTVtr' },
+            data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parliaments/0FxbTVtr"
+          },
+          {
             route: 'current',
             data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parliaments/current"
           },

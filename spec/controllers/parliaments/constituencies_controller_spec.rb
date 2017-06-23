@@ -88,6 +88,7 @@ RSpec.describe Parliaments::ConstituenciesController, vcr: true do
 
   describe '#data_check' do
     context 'an available data format is requested' do
+      # Currently, a_to_z renders the same data as index, so this is reflected in the api request
       methods = [
           {
             route: 'index',
@@ -97,7 +98,7 @@ RSpec.describe Parliaments::ConstituenciesController, vcr: true do
           {
             route: 'a_to_z',
             parameters: { parliament_id: '0FxbTVtr' },
-            data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parliaments/0FxbTVtr/constituencies/a_z_letters"
+            data_url: "#{ENV['PARLIAMENT_BASE_URL']}/parliaments/0FxbTVtr/constituencies"
           },
           {
             route: 'letters',
