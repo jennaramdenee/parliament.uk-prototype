@@ -10,6 +10,7 @@ require 'vcr'
 
 require 'parliament'
 require 'parliament/ntriple'
+require 'parliament/utils'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -106,17 +107,17 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include ApplicationHelper
+  config.include Parliament::Utils::Helpers::ApplicationHelper
 
-  # Set HousesHelper#set_ids instance variables to nil after each spec.
-  # Calling certain HousesHelper methods (e.g. HousesHelper#commons?) causes
-  # HousesHelper#set_ids to be called which sets @commons_id and @lords_id.
+  # Set Parliament::Utils::Helpers::HousesHelper#set_ids instance variables to nil after each spec.
+  # Calling certain Parliament::Utils::Helpers::HousesHelper methods (e.g. Parliament::Utils::Helpers::HousesHelper#commons?) causes
+  # Parliament::Utils::Helpers::HousesHelper#set_ids to be called which sets @commons_id and @lords_id.
   # Setting these to nil causes each spec that requires them to make another
-  # ParliamentHelper request and generate a VCR cassette and stops any RSpec
+  # Parliament::Utils::Helpers::ParliamentHelper request and generate a VCR cassette and stops any RSpec
   # ordering issues where they may or may not have been set by the previous spec.
   config.after(:each) do
-    HousesHelper.instance_variable_set(:@commons_id, nil)
-    HousesHelper.instance_variable_set(:@lords_id, nil)
+    Parliament::Utils::Helpers::HousesHelper.instance_variable_set(:@commons_id, nil)
+    Parliament::Utils::Helpers::HousesHelper.instance_variable_set(:@lords_id, nil)
   end
 
   #Stubs Bandiera::Client methods enabled? and get_features_for_group to clean up logs

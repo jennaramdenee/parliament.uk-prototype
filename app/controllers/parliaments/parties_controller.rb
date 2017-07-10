@@ -3,12 +3,12 @@ module Parliaments
     before_action :data_check, :build_request
 
     ROUTE_MAP = {
-      index: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties },
-      show:  proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]) }
+      index: proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties },
+      show:  proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).parties(params[:party_id]) }
     }.freeze
 
     def index
-      @parliament, @parties = RequestHelper.filter_response_data(
+      @parliament, @parties = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
         @request,
         'http://id.ukpds.org/schema/ParliamentPeriod',
         'http://id.ukpds.org/schema/Party'
@@ -19,7 +19,7 @@ module Parliaments
     end
 
     def show
-      @parliament, @party = RequestHelper.filter_response_data(
+      @parliament, @party = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
         @request,
         'http://id.ukpds.org/schema/ParliamentPeriod',
         'http://id.ukpds.org/schema/Party'

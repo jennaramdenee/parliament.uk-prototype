@@ -4,12 +4,12 @@ module Parliaments
       before_action :data_check, :build_request
 
       ROUTE_MAP = {
-        index: proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]).parties },
-        show:  proc { |params| ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]).parties(params[:party_id]) }
+        index: proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]).parties },
+        show:  proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.parliaments(params[:parliament_id]).houses(params[:house_id]).parties(params[:party_id]) }
       }.freeze
 
       def index
-        @parliament, @house, @parties, @letters = RequestHelper.filter_response_data(
+        @parliament, @house, @parties, @letters = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
           @request,
           'http://id.ukpds.org/schema/ParliamentPeriod',
           'http://id.ukpds.org/schema/House',
@@ -24,7 +24,7 @@ module Parliaments
       end
 
       def show
-        @parliament, @house, @party = RequestHelper.filter_response_data(
+        @parliament, @house, @party = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
           @request,
           'http://id.ukpds.org/schema/ParliamentPeriod',
           'http://id.ukpds.org/schema/House',

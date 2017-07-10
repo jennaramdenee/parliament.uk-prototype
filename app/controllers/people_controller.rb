@@ -2,16 +2,16 @@ class PeopleController < ApplicationController
   before_action :data_check, :build_request, except: :postcode_lookup
 
   ROUTE_MAP = {
-    index:             proc { ParliamentHelper.parliament_request.people },
-    show:              proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]) },
-    lookup:            proc { |params| ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
-    letters:           proc { |params| ParliamentHelper.parliament_request.people(params[:letter]) },
-    a_to_z:            proc { ParliamentHelper.parliament_request.people.a_z_letters },
-    lookup_by_letters: proc { |params| ParliamentHelper.parliament_request.people.partial(params[:letters]) }
+    index:             proc { Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people },
+    show:              proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people(params[:person_id]) },
+    lookup:            proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people.lookup(params[:source], params[:id]) },
+    letters:           proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people(params[:letter]) },
+    a_to_z:            proc { Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people.a_z_letters },
+    lookup_by_letters: proc { |params| Parliament::Utils::Helpers::ParliamentHelper.parliament_request.people.partial(params[:letters]) }
   }.freeze
 
   def index
-    @people, @letters = RequestHelper.filter_response_data(
+    @people, @letters = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
       @request,
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -24,7 +24,7 @@ class PeopleController < ApplicationController
   def show
     @postcode = flash[:postcode]
 
-    @person, @seat_incumbencies, @house_incumbencies = RequestHelper.filter_response_data(
+    @person, @seat_incumbencies, @house_incumbencies = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
       @request,
       'http://id.ukpds.org/schema/Person',
       'http://id.ukpds.org/schema/SeatIncumbency',
@@ -47,11 +47,11 @@ class PeopleController < ApplicationController
     return unless @postcode && @current_incumbency
 
     begin
-      response = PostcodeHelper.lookup(@postcode)
+      response = Parliament::Utils::Helpers::PostcodeHelper.lookup(@postcode)
       @postcode_constituency = response.filter('http://id.ukpds.org/schema/ConstituencyGroup').first
       postcode_correct = @postcode_constituency.graph_id == @current_incumbency.constituency.graph_id
       @postcode_constituency.correct = postcode_correct
-    rescue PostcodeHelper::PostcodeError => error
+    rescue Parliament::Utils::Helpers::PostcodeHelper::PostcodeError => error
       flash[:error] = error.message
       @postcode = nil
     end
@@ -70,7 +70,7 @@ class PeopleController < ApplicationController
   end
 
   def letters
-    @people, @letters = RequestHelper.filter_response_data(
+    @people, @letters = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
       @request,
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK
@@ -81,11 +81,11 @@ class PeopleController < ApplicationController
   end
 
   def a_to_z
-    @letters = RequestHelper.process_available_letters(@request)
+    @letters = Parliament::Utils::Helpers::RequestHelper.process_available_letters(@request)
   end
 
   def lookup_by_letters
-    @people, @letters = RequestHelper.filter_response_data(
+    @people, @letters = Parliament::Utils::Helpers::RequestHelper.filter_response_data(
       @request,
       'http://id.ukpds.org/schema/Person',
       ::Grom::Node::BLANK

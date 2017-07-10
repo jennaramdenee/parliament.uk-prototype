@@ -18,6 +18,7 @@ gem 'parliament-ntriple', '~> 0.1', require: false
 # Parliament Grom Decorators decorates Grom nodes
 gem 'parliament-grom-decorators', '~> 0.2'
 
+gem 'parliament-utils', :path => '../parliament-utils'
 # Converts GeoSparql to GeoJSON
 gem 'geosparql_to_geojson', '~> 0.1'
 
@@ -25,7 +26,8 @@ gem 'geosparql_to_geojson', '~> 0.1'
 gem 'bandiera-client'
 
 # Pugin is the front-end component library used by Parliament
-gem 'pugin', '~> 0.8'
+# gem 'pugin', '~> 0.8'
+gem 'pugin', :path => '../parliament.uk-pugin-components-ruby'
 
 # HAML is used for front-end template rendering
 gem 'haml', '~> 5.0'
