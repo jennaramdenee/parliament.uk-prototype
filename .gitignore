@@ -35,4 +35,6 @@ vendor
 .vscode/
 /backstop/backstop_data/
 /backstop/node_modules/
-/backstop/npm-debug.log
+/backstop/npm-debug.
+
+.rspec_status
