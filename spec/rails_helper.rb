@@ -48,16 +48,6 @@ RSpec.configure do |config|
     Parliament::Utils::Helpers::HousesHelper.instance_variable_set(:@commons_id, nil)
     Parliament::Utils::Helpers::HousesHelper.instance_variable_set(:@lords_id, nil)
   end
-
-  #Stubs Bandiera::Client methods enabled? and get_features_for_group to clean up logs
-  #and streamline cassette
-  # Parliament::Utils::TestHelpers.included_modules.each do |m|
-  #   m.load_rspec_config(config)
-  # end
-  config.before(:each) do
-    allow(BANDIERA_CLIENT).to receive(:enabled?).and_return(false)
-    allow(Pugin::BANDIERA_CLIENT).to receive(:get_features_for_group).and_return({})
-  end
 end
 
 def session

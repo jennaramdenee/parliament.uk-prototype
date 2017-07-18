@@ -4,10 +4,12 @@ PATH
     parliament-utils (0.1.0)
       bandiera-client
       coveralls
+      haml
       i18n
       parliament-grom-decorators (~> 0.2)
       parliament-ntriple
       parliament-ruby (~> 0.7)
+      pugin
       simplecov
       vcard
 
