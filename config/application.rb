@@ -17,6 +17,7 @@ require 'rack/rewrite'
 Bundler.require(*Rails.groups)
 
 require 'pugin'
+require 'parliament/utils'
 
 module MembersPrototype
   class Application < Rails::Application
