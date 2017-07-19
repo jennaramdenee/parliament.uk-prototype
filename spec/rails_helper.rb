@@ -12,8 +12,6 @@ require 'parliament/utils/test_helpers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-
 RSpec.configure do |config|
   Parliament::Utils::TestHelpers.included_modules.each do |m|
     m.load_rspec_config(config)
