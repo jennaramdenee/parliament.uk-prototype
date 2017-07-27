@@ -9,6 +9,13 @@ module Parties
       current_letters: proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current(params[:letter]) },
       a_to_z:          proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.a_z_letters },
       a_to_z_current:  proc { |params| ParliamentHelper.parliament_request.parties(params[:party_id]).members.current.a_z_letters }
+
+      # index:           proc { |params| ParliamentHelper.parliament_request.party_members.set_url_params({ party_id: params[:party_id] }) },
+      # current:         proc { |params| ParliamentHelper.parliament_request.party_current_members.set_url_params({ party_id: params[:party_id] }) },
+      # letters:         proc { |params| ParliamentHelper.parliament_request.party_members_by_initial.set_url_params({ party_id: params[:party_id], initial: params[:letter] }) },
+      # current_letters: proc { |params| ParliamentHelper.parliament_request.party_current_members_by_initial.set_url_params({ party_id: params[:party_id], initial: params[:letter] }) },
+      # a_to_z:          proc { |params| ParliamentHelper.parliament_request.party_members_a_to_z.set_url_params({ party_id: params[:party_id] }) },
+      # a_to_z_current:  proc { |params| ParliamentHelper.parliament_request.party_current_members_a_to_z.set_url_params({ party_id: params[:party_id] }) }
     }.freeze
 
     def index

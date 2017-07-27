@@ -6,6 +6,11 @@ module Houses
       index:   proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties },
       current: proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties.current },
       show:    proc { |params| ParliamentHelper.parliament_request.houses(params[:house_id]).parties(params[:party_id]) }
+
+      # New Data API URL structure
+      # index:   proc { |params| ParliamentHelper.parliament_request.house_parties.set_url_params({ house_id: params[:house_id] }) },
+      # current: proc { |params| ParliamentHelper.parliament_request.house_current_parties.set_url_params({ house_id: params[:house_id] }) },
+      # show:    proc { |params| ParliamentHelper.parliament_request.house_party_by_id.set_url_params({ house_id: params[:house_id], party_id: params[:party_id] }) }
     }.freeze
 
     def index

@@ -5,6 +5,9 @@ module People
     ROUTE_MAP = {
       index:   proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies },
       current: proc { |params| ParliamentHelper.parliament_request.people(params[:person_id]).constituencies.current }
+
+      # index:   proc { |params| ParliamentHelper.parliament_request.person_constituencies.set_url_params({ person_id: params[:person_id] }) },
+      # current: proc { |params| ParliamentHelper.parliament_request.person_current_constituency.set_url_params({ person_id: params[:person_id] }) }
     }.freeze
 
     def index
