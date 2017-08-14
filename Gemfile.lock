@@ -1,3 +1,11 @@
+PATH
+  remote: ../grom
+  specs:
+    grom (0.3.10.pre)
+      activesupport (>= 5.0.0.1)
+      rdf (= 2.2.3)
+      rdf-vocab
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,9 +89,6 @@ GEM
       json-schema (~> 2.8)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    grom (0.3.9)
-      activesupport (>= 5.0.0.1)
-      rdf (= 2.2.3)
     haml (5.0.1)
       temple (>= 0.8.0)
       tilt
@@ -184,6 +189,8 @@ GEM
     rdf (2.2.3)
       hamster (~> 3.0)
       link_header (~> 0.0, >= 0.0.8)
+    rdf-vocab (2.2.3)
+      rdf (~> 2.2)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
@@ -286,6 +293,7 @@ DEPENDENCIES
   dotenv-rails
   foreman
   geosparql_to_geojson (~> 0.1)
+  grom!
   haml (~> 5.0)
   json-ld (~> 2.1)
   mail (~> 2.6)

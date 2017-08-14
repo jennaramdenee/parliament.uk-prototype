@@ -280,4 +280,13 @@ Rails.application.routes.draw do
       get '/', to: 'media#show', medium_id: id_format_regex
     end
   end
+
+  ## Regions ##
+  # /regions
+  scope '/regions', as: 'regions' do
+    get '/', to: 'regions#index'
+    scope '/:region_id', as: 'show' do
+      get '/', to: 'regions#show'
+    end
+  end
 end

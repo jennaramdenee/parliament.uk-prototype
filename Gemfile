@@ -12,6 +12,8 @@ gem 'vcard', '~> 0.2'
 # Parliament Ruby is a wrapper for the internal Parliament data API
 gem 'parliament-ruby', '0.8.0'
 
+gem 'grom', path: '../grom'
+
 # Parliament NTriple processes N-triple data
 gem 'parliament-ntriple', '~> 0.1', require: false
 
