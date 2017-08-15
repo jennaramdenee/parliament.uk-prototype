@@ -15,10 +15,12 @@ gem 'parliament-ruby', '0.8.0'
 gem 'grom', path: '../grom'
 
 # Parliament NTriple processes N-triple data
-gem 'parliament-ntriple', '~> 0.1', require: false
+# gem 'parliament-ntriple', '~> 0.1', require: false
+gem 'parliament-ntriple', path: '../parliament-ntriple', require: false
 
 # Parliament Grom Decorators decorates Grom nodes
-gem 'parliament-grom-decorators', '~> 0.2'
+# gem 'parliament-grom-decorators', '~> 0.2'
+gem 'parliament-grom-decorators', path: '../parliament-grom-decorators'
 
 # Converts GeoSparql to GeoJSON
 gem 'geosparql_to_geojson', '~> 0.1'
