@@ -11,12 +11,6 @@ PATH
   specs:
     parliament-grom-decorators (0.2.7.pre)
 
-PATH
-  remote: ../parliament-ntriple
-  specs:
-    parliament-ntriple (0.1.4.pre2)
-      grom (~> 0.3.9)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -149,6 +143,8 @@ GEM
     parallel (1.12.0)
     parallel_tests (2.14.2)
       parallel
+    parliament-ntriple (0.1.3)
+      grom (~> 0.3.9)
     parliament-ruby (0.8.0)
     parser (2.4.0.0)
       ast (~> 2.2)
@@ -308,7 +304,7 @@ DEPENDENCIES
   mail (~> 2.6)
   parallel_tests
   parliament-grom-decorators!
-  parliament-ntriple!
+  parliament-ntriple (~> 0.1)
   parliament-ruby (= 0.8.0)
   pry
   pugin (~> 0.9)

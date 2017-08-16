@@ -3,7 +3,7 @@ module Places
     before_action :data_check, :build_request
 
     ROUTE_MAP = {
-      index:             proc { ParliamentHelper.parliament_request.region_index },
+      index:  proc { ParliamentHelper.parliament_request.region_index },
     }.freeze
 
     # Renders a list of regions

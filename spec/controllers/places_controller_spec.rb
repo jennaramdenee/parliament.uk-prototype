@@ -4,7 +4,7 @@ RSpec.describe PlacesController, vcr: true do
 
   describe 'GET show' do
     before(:each) do
-      get :show, params: { place_id: '7000000000041422' }
+      get :show, params: { place_id: 'E15000001' }
     end
 
     it 'should have a response with http status ok (200)' do
